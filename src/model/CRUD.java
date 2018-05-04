@@ -13,7 +13,7 @@ public class CRUD {
 		employee.setCommissionPct(new BigDecimal(0.1));
 		employee.setDepartmentId(new BigDecimal(90));
 		employee.setEmail("MPARSZ");
-		employee.setFirstName("Milosz");
+		employee.setFirstName("M");
 		employee.setHireDate(new Date());
 		employee.setJobId("SA_REP");
 		employee.setLastName("Parszewski");
@@ -23,10 +23,9 @@ public class CRUD {
 		employee.setEmployeeId(new BigDecimal(500));
 
 		employeeCRUD.createEmployee(employee);
-		employeeCRUD.readEmployee(192);
-		employeeCRUD.updateSalary(192);
-		employeeCRUD.readEmployee(192);
-		employeeCRUD.deleteEmployee(500);
+		employeeCRUD.readEmployee(195);
+		employeeCRUD.updateSalary(195);
+		employeeCRUD.deleteEmployee(501);
 
 		employeeCRUD.finalize();
 	}

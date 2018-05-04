@@ -5,13 +5,14 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
+
 /**
  * The persistent class for the EMPLOYEES database table.
  * 
  */
 @Entity
-@Table(name = "EMPLOYEES")
-@NamedQuery(name = "Employee.findAll", query = "SELECT e FROM Employee e")
+@Table(name="EMPLOYEES")
+@NamedQuery(name="Employee.findAll", query="SELECT e FROM Employee e")
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private BigDecimal commissionPct;
@@ -29,7 +30,8 @@ public class Employee implements Serializable {
 	public Employee() {
 	}
 
-	@Column(name = "COMMISSION_PCT", precision = 2, scale = 2)
+
+	@Column(name="COMMISSION_PCT", precision=2, scale=2)
 	public BigDecimal getCommissionPct() {
 		return this.commissionPct;
 	}
@@ -38,7 +40,8 @@ public class Employee implements Serializable {
 		this.commissionPct = commissionPct;
 	}
 
-	@Column(name = "DEPARTMENT_ID", precision = 4)
+
+	@Column(name="DEPARTMENT_ID", precision=4)
 	public BigDecimal getDepartmentId() {
 		return this.departmentId;
 	}
@@ -47,7 +50,8 @@ public class Employee implements Serializable {
 		this.departmentId = departmentId;
 	}
 
-	@Column(nullable = false, length = 25)
+
+	@Column(nullable=false, length=25)
 	public String getEmail() {
 		return this.email;
 	}
@@ -56,18 +60,21 @@ public class Employee implements Serializable {
 		this.email = email;
 	}
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "EMPLOYEE_ID", precision = 6)
+	@Column(name="EMPLOYEE_ID", precision=6)
 	public BigDecimal getEmployeeId() {
 		return this.employeeId;
 	}
+
 
 	public void setEmployeeId(BigDecimal employeeId) {
 		this.employeeId = employeeId;
 	}
 
-	@Column(name = "FIRST_NAME", length = 20)
+
+	@Column(name="FIRST_NAME", length=20)
 	public String getFirstName() {
 		return this.firstName;
 	}
@@ -76,8 +83,9 @@ public class Employee implements Serializable {
 		this.firstName = firstName;
 	}
 
+
 	@Temporal(TemporalType.DATE)
-	@Column(name = "HIRE_DATE", nullable = false)
+	@Column(name="HIRE_DATE", nullable=false)
 	public Date getHireDate() {
 		return this.hireDate;
 	}
@@ -86,7 +94,8 @@ public class Employee implements Serializable {
 		this.hireDate = hireDate;
 	}
 
-	@Column(name = "JOB_ID", nullable = false, length = 10)
+
+	@Column(name="JOB_ID", nullable=false, length=10)
 	public String getJobId() {
 		return this.jobId;
 	}
@@ -95,7 +104,8 @@ public class Employee implements Serializable {
 		this.jobId = jobId;
 	}
 
-	@Column(name = "LAST_NAME", nullable = false, length = 25)
+
+	@Column(name="LAST_NAME", nullable=false, length=25)
 	public String getLastName() {
 		return this.lastName;
 	}
@@ -104,7 +114,8 @@ public class Employee implements Serializable {
 		this.lastName = lastName;
 	}
 
-	@Column(name = "MANAGER_ID", precision = 6)
+
+	@Column(name="MANAGER_ID", precision=6)
 	public BigDecimal getManagerId() {
 		return this.managerId;
 	}
@@ -113,7 +124,8 @@ public class Employee implements Serializable {
 		this.managerId = managerId;
 	}
 
-	@Column(name = "PHONE_NUMBER", length = 20)
+
+	@Column(name="PHONE_NUMBER", length=20)
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}
@@ -122,7 +134,8 @@ public class Employee implements Serializable {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@Column(precision = 8, scale = 2)
+
+	@Column(precision=8, scale=2)
 	public BigDecimal getSalary() {
 		return this.salary;
 	}

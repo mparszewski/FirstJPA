@@ -14,45 +14,67 @@ public class EmployeeCRUD {
 	}
 
 	public void createEmployee(Employee employee) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		entityManager.getTransaction().begin();
-		entityManager.persist(employee);
-		entityManager.getTransaction().commit();
-		entityManager.close();
+		if (employeeExists(employee.getEmployeeId())) {
+			System.out.println("Pracownik ju¿ istnieje \n");
+		} else {
+			EntityManager entityManager = entityManagerFactory.createEntityManager();
+			entityManager.getTransaction().begin();
+			entityManager.persist(employee);
+			entityManager.getTransaction().commit();
+			entityManager.close();
+		}
 	}
 
 	public void readEmployee(int id) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		Employee employee = entityManager.find(Employee.class, new BigDecimal(id));
-		System.out.println("Employee id: " + employee.getEmployeeId());
-		System.out.println("First name: " + employee.getFirstName());
-		System.out.println("Last name: " + employee.getLastName());
-		System.out.println("Email: " + employee.getEmail());
-		System.out.println("Phone number: " + employee.getPhoneNumber());
-		System.out.println("Hire Date: " + employee.getHireDate());
-		System.out.println("Job id: " + employee.getJobId());
-		System.out.println("Salary: " + employee.getSalary());
-		System.out.println("Commission PCT: " + employee.getCommissionPct());
-		System.out.println("Manager id: " + employee.getManagerId());
-		System.out.println("Department id: " + employee.getDepartmentId() + "\n");
+		if (employee != null) {
+			System.out.println("Employee id: " + employee.getEmployeeId());
+			System.out.println("First name: " + employee.getFirstName());
+			System.out.println("Last name: " + employee.getLastName());
+			System.out.println("Email: " + employee.getEmail());
+			System.out.println("Phone number: " + employee.getPhoneNumber());
+			System.out.println("Hire Date: " + employee.getHireDate());
+			System.out.println("Job id: " + employee.getJobId());
+			System.out.println("Salary: " + employee.getSalary());
+			System.out.println("Commission PCT: " + employee.getCommissionPct());
+			System.out.println("Manager id: " + employee.getManagerId());
+			System.out.println("Department id: " + employee.getDepartmentId() + "\n");
+		}
 	}
 
 	public void updateSalary(int id) {
-		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Employee employee = entityManager.find(Employee.class, new BigDecimal(id));
-		entityManager.getTransaction().begin();
-		employee.setSalary(employee.getSalary().multiply(new BigDecimal(1.1)));
-		entityManager.getTransaction().commit();
-		entityManager.close();
+		if (employeeExists(new BigDecimal(id))) {
+			EntityManager entityManager = entityManagerFactory.createEntityManager();
+			Employee employee = entityManager.find(Employee.class, new BigDecimal(id));
+			entityManager.getTransaction().begin();
+			employee.setSalary(employee.getSalary().multiply(new BigDecimal(1.1)));
+			System.out.println(employee.getSalary());
+			entityManager.getTransaction().commit();
+			entityManager.close();
+		} else
+			System.out.println("Pracownik o podanym id nie istnieje. Nie mo¿na podnieœæ jego pensji. \n");
 	}
 
 	public void deleteEmployee(int id) {
+		if (employeeExists(new BigDecimal(id))) {
+			EntityManager entityManager = entityManagerFactory.createEntityManager();
+			Employee employee = entityManager.find(Employee.class, new BigDecimal(id));
+			entityManager.getTransaction().begin();
+			entityManager.remove(employee);
+			entityManager.getTransaction().commit();
+			entityManager.close();
+		} else
+			System.out.println("Pracownik o podanym id nie istnieje. Nie mo¿na go usun¹æ \n");
+	}
+
+	public boolean employeeExists(BigDecimal id) {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		Employee employee = entityManager.find(Employee.class, new BigDecimal(id));
-		entityManager.getTransaction().begin();
-		entityManager.remove(employee);
-		entityManager.getTransaction().commit();
-		entityManager.close();
+		Employee employee = entityManager.find(Employee.class, id);
+		if (employee == null)
+			return false;
+		else
+			return true;
 	}
 
 	@Override
